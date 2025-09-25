@@ -620,7 +620,7 @@
 			Send Email
 		</a>
 		<a
-			href="https://wa.me/6281234567890"
+			href="https://wa.me/6282112572485"
 			target="_blank"
 			rel="noreferrer"
 			class="inline-flex items-center justify-center px-4 md:px-6 py-2 md:py-3 text-white rounded-lg transition-all duration-300 text-sm md:text-base font-medium shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 {$theme ===

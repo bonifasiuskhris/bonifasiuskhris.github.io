@@ -1,0 +1,71 @@
+import {
+	g as A,
+	p as L,
+	P as D,
+	a as P,
+	b as T,
+	c as b,
+	i as B,
+	d as Y,
+	D as h,
+	l as M,
+	h as N,
+	j as U,
+	k as q,
+	S as x,
+	L as $,
+	m as j,
+	u as w,
+	o as z,
+	q as C
+} from './1g9Fanb8.js';
+import { c as G } from './Dv3lWn-M.js';
+function F(r, a, t, s) {
+	var f = !M || (t & N) !== 0,
+		v = (t & U) !== 0,
+		E = (t & C) !== 0,
+		n = s,
+		S = !0,
+		g = () => (S && ((S = !1), (n = E ? w(s) : s)), n);
+	let u;
+	if (v) {
+		var O = x in r || $ in r;
+		u = A(r, a)?.set ?? (O && a in r ? (e) => (r[a] = e) : void 0);
+	}
+	var _,
+		I = !1;
+	(v ? ([_, I] = G(() => r[a])) : (_ = r[a]),
+		_ === void 0 && s !== void 0 && ((_ = g()), u && (f && L(), u(_))));
+	var i;
+	if (
+		(f
+			? (i = () => {
+					var e = r[a];
+					return e === void 0 ? g() : ((S = !0), e);
+				})
+			: (i = () => {
+					var e = r[a];
+					return (e !== void 0 && (n = void 0), e === void 0 ? n : e);
+				}),
+		f && (t & D) === 0)
+	)
+		return i;
+	if (u) {
+		var R = r.$$legacy;
+		return function (e, l) {
+			return arguments.length > 0 ? ((!f || !l || R || I) && u(l ? i() : e), e) : i();
+		};
+	}
+	var c = !1,
+		d = ((t & z) !== 0 ? j : q)(() => ((c = !1), i()));
+	v && P(d);
+	var m = Y;
+	return function (e, l) {
+		if (arguments.length > 0) {
+			const o = l ? P(d) : f && v ? T(e) : e;
+			return (b(d, o), (c = !0), n !== void 0 && (n = o), e);
+		}
+		return (B && c) || (m.f & h) !== 0 ? d.v : P(d);
+	};
+}
+export { F as p };

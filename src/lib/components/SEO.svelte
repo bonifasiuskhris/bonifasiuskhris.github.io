@@ -33,7 +33,7 @@
 							url: siteUrl
 						}
 					]
-			  }
+				}
 			: {
 					'@context': 'https://schema.org',
 					'@type': 'Person',
@@ -45,7 +45,7 @@
 						'https://github.com/bonifasiuskhris',
 						'https://twitter.com/bonifasiuskhris'
 					]
-			  };
+				};
 </script>
 
 <svelte:head>

@@ -1,18 +1,37 @@
 <script>
 	import { page } from '$app/stores';
 	import '../app.postcss';
+	import Analytics from '$lib/analytics.svelte';
+	import ThemeToggle from '$lib/components/ThemeToggle.svelte';
+	import { theme } from '$lib/stores/theme.js';
+	import { onMount } from 'svelte';
 
 	// Check if we are on the admin page
 	$: isAdminPage = $page.url.pathname.startsWith('/admin');
+
+	onMount(() => {
+		if (theme && typeof theme.init === 'function') {
+			theme.init();
+		}
+	});
 </script>
 
 <!-- If we are on the admin page, DO NOT load the layout (navbar, footer, etc.) -->
 {#if isAdminPage}
 	<slot />
 {:else}
-	<div class="flex flex-col min-h-screen">
+	<div
+		class="flex flex-col min-h-screen transition-colors duration-300 {$theme === 'light'
+			? 'bg-white'
+			: 'bg-indigo_dye-100'}"
+	>
+		<!-- Theme Toggle -->
+		<div class="fixed top-4 right-4 z-50 hidden sm:block">
+			<ThemeToggle />
+		</div>
+
 		<!-- Navbar -->
-		<div class="navbar bg-base-100 shadow-md sticky top-0 z-50">
+		<div class="navbar bg-base-100 shadow-md sticky top-0 z-40">
 			<div class="navbar-start">
 				<div class="dropdown">
 					<label tabindex="0" class="btn btn-ghost sm:hidden">
@@ -38,6 +57,7 @@
 						<li><a href="/resume">Resume</a></li>
 						<li><a href="/projects">Projects</a></li>
 						<li><a href="/blog">Blog</a></li>
+						<li class="mt-2"><ThemeToggle /></li>
 					</ul>
 				</div>
 				<a href="/" class="btn btn-ghost normal-case text-xl font-bold">bonifasiuskhris</a>
@@ -53,8 +73,8 @@
 		</div>
 
 		<!-- Main Content -->
-		<main class="flex-grow max-w-screen-md mx-auto w-full">
-			<div class="my-12 mx-4 lg:mx-0">
+		<main class="flex-grow max-w-screen-md mx-auto w-full py-4 md:py-8 px-4">
+			<div class="space-y-8">
 				<slot />
 			</div>
 		</main>
@@ -68,4 +88,5 @@
 			</div>
 		</footer>
 	</div>
+	<Analytics />
 {/if}

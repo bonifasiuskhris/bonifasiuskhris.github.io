@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html data-theme="dark" lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" href="../favicon.png" />
+		<meta name="viewport" content="width=device-width" />
+		
+		<link href="../_app/immutable/assets/0.BK_TX_IE.css" rel="stylesheet">
+		<link rel="modulepreload" href="../_app/immutable/entry/start.CZm-w0Bx.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/C5UedNWm.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/DorO-AfT.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/C9ktuSxu.js">
+		<link rel="modulepreload" href="../_app/immutable/entry/app.BODgZ3MO.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/DsnmJJEf.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/D2t5Mpjk.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/D8OtpdMg.js">
+		<link rel="modulepreload" href="../_app/immutable/nodes/0.BDaZCFM6.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/C5CKA0lx.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/DQlgQG5M.js">
+		<link rel="modulepreload" href="../_app/immutable/nodes/5.D_4SUkoH.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/YIF20Z2I.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/BdpKg4bX.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/IcmVBQ66.js"><!--[--><meta name="description" content="Deep dive into React Hooks including useState, useEffect, useContext, and custom hooks. Learn when and how to use each hook effectively."/><!--]--><title>Mastering React Hooks: A Complete Guide - Bonifasius Khrisna</title>
+		
+		
+		<!-- Google tag (gtag.js) -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=G-5TC1646G2L"></script>
+		<script>
+			window.dataLayer = window.dataLayer || [];
+			function gtag(){dataLayer.push(arguments);}
+			gtag('js', new Date());
+
+			gtag('config', 'G-5TC1646G2L');
+		</script>
+	</head>
+	<body data-sveltekit-preload-data="hover">
+		<div style="display: contents"><!--[--><!--[--><!----><main class="min-h-screen transition-colors duration-300 bg-slate-900 py-4 md:py-8 px-4"><div class="fixed top-4 right-4 z-50"><!--[!--><!--]--><!----></div> <div class="max-w-4xl mx-auto space-y-8"><!--[--><!----><main class="min-h-screen transition-colors duration-300 bg-slate-900"><nav class="sticky top-0 z-50 backdrop-blur-md bg-white/80 dark:bg-slate-900/80 border-b border-slate-200 dark:border-slate-800"><div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"><div class="flex justify-between items-center h-16"><div class="flex items-center space-x-8"><a href="/" class="text-xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Bonifasius Khrisna</a> <div class="hidden md:flex space-x-6"><a href="/" class="text-slate-600 hover:text-blue-600 dark:text-slate-300 dark:hover:text-blue-400 transition-colors">Home</a> <a href="/portfolio" class="text-slate-600 hover:text-blue-600 dark:text-slate-300 dark:hover:text-blue-400 transition-colors">Portfolio</a> <a href="/blog" class="text-slate-600 hover:text-blue-600 dark:text-slate-300 dark:hover:text-blue-400 transition-colors">Blog</a></div></div> <div class="flex items-center space-x-4"><button class="relative inline-flex h-6 w-11 items-center rounded-full transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 bg-blue-600 focus:ring-blue-500" aria-label="Toggle theme"><span class="inline-block h-4 w-4 transform rounded-full bg-white transition-transform duration-200 translate-x-6"><!--[!--><svg class="h-3 w-3 text-blue-400 absolute top-0.5 left-0.5" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg><!--]--></span></button></div></div></div></nav> <section class="py-12 px-4 sm:px-6 lg:px-8"><div class="max-w-4xl mx-auto"><div class="text-center mb-8"><div class="flex flex-wrap justify-center gap-2 mb-4"><!--[--><span class="skill-badge text-sm px-3 py-1">React</span><span class="skill-badge text-sm px-3 py-1">JavaScript</span><span class="skill-badge text-sm px-3 py-1">Frontend</span><!--]--></div> <h1 class="text-3xl md:text-5xl font-bold mb-4 text-white">Mastering React Hooks: A Complete Guide</h1> <p class="text-xl text-slate-600 dark:text-slate-300 mb-6">Deep dive into React Hooks including useState, useEffect, useContext, and custom hooks. Learn when and how to use each hook effectively.</p> <div class="flex items-center justify-center space-x-4 text-sm text-slate-500 dark:text-slate-400"><span>By Bonifasius Khrisna</span> <span>•</span> <time datetime="2024-01-10">January 10, 2024</time> <span>•</span> <span>12 min read</span></div></div></div></section> <article class="py-8 px-4 sm:px-6 lg:px-8"><div class="max-w-4xl mx-auto"><div class="section-card prose prose-lg dark:prose-invert max-w-none"><!---->
+React Hooks have revolutionized the way we write React components, making functional components more powerful and eliminating the need for class components in many cases. In this comprehensive guide, we'll explore the most commonly used hooks and learn how to leverage them effectively in your React applications.
+
+## What are React Hooks?
+
+React Hooks are functions that allow you to "hook into" React features from functional components. They were introduced in React 16.8 and have since become the standard way to write React components.
+
+### Key Benefits of Hooks:
+- **Simpler Code**: Functional components with hooks are generally easier to read and understand
+- **Reusable Logic**: Custom hooks allow you to extract and reuse stateful logic
+- **Better Composition**: Hooks make it easier to split complex components into smaller functions
+- **Testing**: Functional components with hooks are often easier to test
+
+## The useState Hook
+
+The useState hook is the most fundamental hook, allowing you to add state to functional components.
+
+```javascript
+import React, { useState } from 'react';
+
+function Counter() {
+  const [count, setCount] = useState(0);
+  const [name, setName] = useState('');
+
+  return (
+    <div>
+      <p>You clicked {count} times</p>
+      <button onClick={() => setCount(count + 1)}>
+        Click me
+      </button>
+      <input 
+        value={name} 
+        onChange={(e) => setName(e.target.value)} 
+        placeholder="Enter your name"
+      />
+    </div>
+  );
+}
+```
+
+### Best Practices for useState:
+1. **Use multiple useState calls** for unrelated state variables
+2. **Functional updates** when new state depends on previous state
+3. **Lazy initial state** for expensive computations
+
+## The useEffect Hook
+
+The useEffect hook lets you perform side effects in functional components. It serves the same purpose as componentDidMount, componentDidUpdate, and componentWillUnmount combined.
+
+```javascript
+import React, { useState, useEffect } from 'react';
+
+function UserProfile({ userId }) {
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function fetchUser() {
+      setLoading(true);
+      try {
+        const response = await fetch(`/api/users/${userId}`);
+        const userData = await response.json();
+        setUser(userData);
+      } catch (error) {
+        console.error('Error fetching user:', error);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchUser();
+  }, [userId]); // Dependency array
+
+  if (loading) return <div>Loading...</div>;
+  if (!user) return <div>User not found</div>;
+
+  return (
+    <div>
+      <h1>{user.name}</h1>
+      <p>{user.email}</p>
+    </div>
+  );
+}
+```
+
+### Understanding the Dependency Array
+
+The dependency array is crucial for controlling when your effect runs:
+
+- **No array**: Effect runs after every render
+- **Empty array []**: Effect runs only after initial render (componentDidMount)
+- **With dependencies [dep1, dep2]**: Effect runs when dependencies change
+
+### Cleanup Functions
+
+Effects can return a cleanup function that runs before the component unmounts or before the effect runs again:
+
+```javascript
+useEffect(() => {
+  const subscription = dataSource.subscribe(handleChange);
+  
+  // Cleanup function
+  return () => {
+    subscription.unsubscribe();
+  };
+}, [dataSource]);
+```
+
+## The useContext Hook
+
+The useContext hook allows you to consume context without wrapping your component:
+
+```javascript
+// Context definition
+const ThemeContext = React.createContext('light');
+
+// Context Provider
+function App() {
+  const [theme, setTheme] = useState('light');
+  
+  return (
+    <ThemeContext.Provider value={{ theme, setTheme }}>
+      <Header />
+    </ThemeContext.Provider>
+  );
+}
+
+// Consuming context with useContext
+function Header() {
+  const { theme, setTheme } = useContext(ThemeContext);
+  
+  return (
+    <header className={`header-${theme}`}>
+      <button onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}>
+        Toggle Theme
+      </button>
+    </header>
+  );
+}
+```
+
+## Custom Hooks
+
+Custom hooks are JavaScript functions that start with "use" and can call other hooks. They're perfect for extracting component logic into reusable functions.
+
+### Example: useLocalStorage
+
+```javascript
+function useLocalStorage(key, initialValue) {
+  const [storedValue, setStoredValue] = useState(() => {
+    try {
+      const item = window.localStorage.getItem(key);
+      return item ? JSON.parse(item) : initialValue;
+    } catch (error) {
+      console.error(error);
+      return initialValue;
+    }
+  });
+
+  const setValue = (value) => {
+    try {
+      setStoredValue(value);
+      window.localStorage.setItem(key, JSON.stringify(value));
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  return [storedValue, setValue];
+}
+
+// Usage
+function App() {
+  const [name, setName] = useLocalStorage('name', '');
+  
+  return (
+    <input
+      value={name}
+      onChange={(e) => setName(e.target.value)}
+      placeholder="Your name persists!"
+    />
+  );
+}
+```
+
+### Rules of Hooks
+
+React has two main rules for hooks:
+
+1. **Only call hooks at the top level**: Don't call hooks inside loops, conditions, or nested functions
+2. **Only call hooks from React functions**: Call them from React functional components or custom hooks
+
+## Performance Optimization with Hooks
+
+### useMemo Hook
+
+Use useMemo to memoize expensive calculations:
+
+```javascript
+const expensiveValue = useMemo(() => {
+  return computeExpensiveValue(a, b);
+}, [a, b]);
+```
+
+### useCallback Hook
+
+Use useCallback to memoize functions:
+
+```javascript
+const handleClick = useCallback(() => {
+  doSomething(a, b);
+}, [a, b]);
+```
+
+## Common Pitfalls and How to Avoid Them
+
+### 1. Stale Closures
+
+Be careful with event handlers and async functions:
+
+```javascript
+// Problem: Stale closure
+useEffect(() => {
+  const timer = setTimeout(() => {
+    console.log(count); // This might be stale!
+  }, 1000);
+}, []); // Empty dependency array
+
+// Solution: Include dependencies or use functional updates
+useEffect(() => {
+  const timer = setTimeout(() => {
+    console.log(count);
+  }, 1000);
+  
+  return () => clearTimeout(timer);
+}, [count]);
+```
+
+### 2. Infinite Loops
+
+Avoid infinite loops by properly managing dependencies:
+
+```javascript
+// Problem: Infinite loop
+useEffect(() => {
+  setCount(count + 1); // This triggers a re-render
+}, [count]); // This dependency causes infinite loop
+
+// Solution: Use functional updates
+useEffect(() => {
+  setCount(prevCount => prevCount + 1);
+}, []); // No dependency needed
+```
+
+## Best Practices Summary
+
+1. **Start with functional components** and use hooks for state and side effects
+2. **Keep hooks simple** - one hook per concern
+3. **Use the dependency array correctly** - include all values used in the effect
+4. **Extract custom hooks** when you have reusable logic
+5. **Test your hooks** thoroughly, especially custom ones
+6. **Use ESLint plugin** for React hooks to catch common mistakes
+
+## Conclusion
+
+React Hooks have fundamentally changed how we build React applications. They provide a more direct API to the React concepts you already know: props, state, context, refs, and lifecycle. By following the patterns and best practices outlined in this guide, you'll be able to write more readable, maintainable, and testable React components.
+
+Remember that mastering hooks takes practice. Start with the basic hooks (useState, useEffect) and gradually incorporate more advanced patterns as you become comfortable with the fundamentals.
+		<!----></div></div></article> <section class="py-16 px-4 sm:px-6 lg:px-8 bg-slate-100 dark:bg-slate-800/50"><div class="max-w-7xl mx-auto"><h2 class="text-2xl md:text-3xl font-bold text-center mb-12"><span class="text-white">More Articles</span></h2> <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"><!--[--><!--]--></div></div></section></main><!----><!--]--></div></main><!----><!--]--> <!--[!--><!--]--><!--]-->
+			
+			<script>
+				{
+					__sveltekit_1jcw3pw = {
+						base: new URL("..", location).pathname.slice(0, -1)
+					};
+
+					const element = document.currentScript.parentElement;
+
+					Promise.all([
+						import("../_app/immutable/entry/start.CZm-w0Bx.js"),
+						import("../_app/immutable/entry/app.BODgZ3MO.js")
+					]).then(([kit, app]) => {
+						kit.start(app, element, {
+							node_ids: [0, 5],
+							data: [null,null],
+							form: null,
+							error: null
+						});
+					});
+				}
+			</script>
+		</div>
+	</body>
+</html>

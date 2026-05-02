@@ -8,88 +8,144 @@
 	onMount(() => {
 		mounted = true;
 	});
+
+	function downloadPDF() {
+		// Create a new window with print-friendly version
+		const printWindow = window.open('', '_blank');
+		printWindow.document.write(`
+			<!DOCTYPE html>
+			<html>
+			<head>
+				<title>Bonifasius Khrisna Wicaksono - Resume</title>
+				<style>
+					body { font-family: 'Inter', sans-serif; margin: 2rem; color: #000; }
+					h1 { font-size: 2rem; margin-bottom: 0.5rem; }
+					h2 { font-size: 1.5rem; color: #2563eb; margin-bottom: 1rem; }
+					h3 { font-size: 1.25rem; margin-top: 1.5rem; margin-bottom: 0.5rem; }
+					.contact-info { margin-bottom: 2rem; }
+					.section { margin-bottom: 2rem; }
+					.skill-list { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+					.skill { background: #e5e7eb; padding: 0.25rem 0.75rem; border-radius: 4px; font-size: 0.875rem; }
+					.timeline-item { margin-bottom: 1.5rem; }
+					.date { color: #64748b; font-size: 0.875rem; }
+				</style>
+			</head>
+			<body>
+				<h1>Bonifasius Khrisna Wicaksono</h1>
+				<h2>Full-Stack Web Developer</h2>
+				<div class="contact-info">
+					<p>Jakarta, Indonesia | bonifasiuskhris@gmail.com</p>
+					<p>LinkedIn: linkedin.com/in/bonifasiuskhris/ | GitHub: github.com/bonifasiuskhris</p>
+				</div>
+				<div class="section">
+					<h3>About Me</h3>
+					<p>I'm a Full-stack Developer with a unique UI/UX approach and practical experience in web development, project management, and marketing.</p>
+				</div>
+				<div class="section">
+					<h3>Technical Skills</h3>
+					<div class="skill-list">
+						<span class="skill">PHP</span>
+						<span class="skill">Laravel</span>
+						<span class="skill">MySQL</span>
+						<span class="skill">JavaScript</span>
+						<span class="skill">HTML</span>
+						<span class="skill">Tailwind CSS</span>
+						<span class="skill">Nginx</span>
+						<span class="skill">Svelte</span>
+					</div>
+				</div>
+			</body>
+			</html>
+		`);
+		printWindow.document.close();
+		printWindow.print();
+	}
 </script>
 
-<!-- Hero Section -->
-<section class="section-card animate-fade-in" class:animate-slide-up={mounted}>
-	<div class="flex flex-col md:flex-row items-center gap-6 md:gap-8">
+<main class="min-h-screen transition-colors duration-300 {$theme === 'light' ? 'bg-slate-50' : 'bg-slate-900'}">
+	<!-- Navigation -->
+	<nav class="sticky top-0 z-50 backdrop-blur-md bg-white/80 dark:bg-slate-900/80 border-b border-slate-200 dark:border-slate-800">
+		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+			<div class="flex justify-between items-center h-16">
+				<div class="flex items-center space-x-8">
+					<a href="/" class="text-xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+						Bonifasius Khrisna
+					</a>
+					<div class="hidden md:flex space-x-6">
+						<a href="/" class="text-blue-600 dark:text-blue-400 font-medium">
+							Home
+						</a>
+						<a href="/portfolio" class="text-slate-600 hover:text-blue-600 dark:text-slate-300 dark:hover:text-blue-400 transition-colors">
+							Portfolio
+						</a>
+						<a href="/blog" class="text-slate-600 hover:text-blue-600 dark:text-slate-300 dark:hover:text-blue-400 transition-colors">
+							Blog
+						</a>
+					</div>
+				</div>
+				<div class="flex items-center space-x-4">
+					<!-- Theme Toggle -->
+					<button
+						on:click={() => theme.toggle()}
+						class="relative inline-flex h-6 w-11 items-center rounded-full transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 {$theme === 'dark' ? 'bg-blue-600 focus:ring-blue-500' : 'bg-slate-300 focus:ring-blue-500'}"
+						aria-label="Toggle theme"
+					>
+						<span class="inline-block h-4 w-4 transform rounded-full bg-white transition-transform duration-200 {$theme === 'dark' ? 'translate-x-6' : 'translate-x-1'}">
+							{#if $theme === 'light'}
+								<svg class="h-3 w-3 text-yellow-500 absolute top-0.5 left-0.5" fill="currentColor" viewBox="0 0 20 20">
+									<path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd" />
+								</svg>
+							{:else}
+								<svg class="h-3 w-3 text-blue-400 absolute top-0.5 left-0.5" fill="currentColor" viewBox="0 0 20 20">
+									<path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" />
+								</svg>
+							{/if}
+						</span>
+					</button>
+				</div>
+			</div>
+		</div>
+	</nav>
+
+	<!-- Hero Section -->
+	<section class="section-card animate-fade-in" class:animate-slide-up={mounted}>
+	<div class="flex flex-col md:flex-row items-center gap-8 md:gap-12">
 		<div class="flex-shrink-0">
 			<img
-				class="w-24 h-24 md:w-32 md:h-32 lg:w-40 lg:h-40 rounded-full object-cover border-4 {$theme ===
-			'light'
-				? 'border-orange_pantone-200'
-				: 'border-orange_pantone-400'} transition-transform duration-300 hover:scale-105"
+				class="w-32 h-32 md:w-40 md:h-40 lg:w-48 lg:h-48 rounded-full object-cover border-4 {$theme === 'light' ? 'border-white shadow-lg' : 'border-slate-700 shadow-xl'} transition-all duration-300 hover:scale-105 hover:shadow-2xl"
 				src={profile_img}
 				alt="Bonifasius Khrisna Wicaksono"
 			/>
 		</div>
-		<div class="text-center md:text-left">
-			<h1
-				class="text-2xl md:text-4xl lg:text-5xl font-bold {$theme === 'light'
-					? 'text-black-500'
-					: 'text-white'} mb-2"
-			>
+		<div class="text-center md:text-left flex-1">
+			<h1 class="text-heading text-3xl md:text-4xl lg:text-5xl font-bold mb-3 text-transparent bg-clip-text bg-gradient-to-r {$theme === 'light' ? 'from-slate-900 to-blue-600' : 'from-white to-blue-400'}">
 				Bonifasius Khrisna Wicaksono
 			</h1>
-			<h2
-				class="text-lg md:text-xl lg:text-2xl font-semibold mb-4 {$theme === 'light'
-					? 'text-orange_pantone-600'
-					: 'text-orange_pantone-800'}"
-			>
+			<h2 class="text-xl md:text-2xl lg:text-3xl font-medium mb-6 {$theme === 'light' ? 'text-slate-600' : 'text-slate-300'}">
 				Full-Stack Web Developer
 			</h2>
-			<div
-				class="flex flex-col md:flex-row items-center gap-2 mb-4 md:mb-6 text-sm md:text-base {$theme ===
-				'light'
-					? 'text-black-700'
-					: 'text-white'}"
-			>
-				<div class="flex items-center">
-					<svg
-						class="w-4 h-4 md:w-5 md:h-5 mr-2 {$theme === 'light'
-					? 'text-orange_pantone-600'
-					: 'text-orange_pantone-400'}"
-						fill="currentColor"
-						viewBox="0 0 20 20"
-						xmlns="http://www.w3.org/2000/svg"
-					>
-						<path
-							fill-rule="evenodd"
-							d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
-							clip-rule="evenodd"
-						></path>
-					</svg>
-					<span>Jakarta, Indonesia</span>
-				</div>
-				<div
-					class="hidden md:block {$theme === 'light' ? 'text-black-400' : 'text-white-500'}"
-				>
-					•
-				</div>
-				<div class="flex items-center">
-					<svg
-						class="w-4 h-4 md:w-5 md:h-5 mr-2 {$theme === 'light'
-					? 'text-orange_pantone-600'
-					: 'text-orange_pantone-400'}"
-						fill="currentColor"
-						viewBox="0 0 20 20"
-						xmlns="http://www.w3.org/2000/svg"
-					>
-						<path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path>
-						<path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path>
-					</svg>
-					<span>bonifasiuskhris@gmail.com</span>
-				</div>
+			<div class="flex flex-col md:flex-row items-center gap-4 md:gap-6 mb-6 md:mb-8 text-sm md:text-base">
+			<div class="flex items-center {$theme === 'light' ? 'text-slate-600' : 'text-slate-400'}">
+				<svg class="w-4 h-4 md:w-5 md:h-5 mr-2 {$theme === 'light' ? 'text-blue-600' : 'text-blue-400'}" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+					<path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path>
+				</svg>
+				<span class="font-medium">Jakarta, Indonesia</span>
 			</div>
-			<div class="flex flex-wrap justify-center md:justify-start gap-2 md:gap-3">
+			<div class="hidden md:block {$theme === 'light' ? 'text-slate-400' : 'text-slate-600'}">•</div>
+			<div class="flex items-center {$theme === 'light' ? 'text-slate-600' : 'text-slate-400'}">
+				<svg class="w-4 h-4 md:w-5 md:h-5 mr-2 {$theme === 'light' ? 'text-blue-600' : 'text-blue-400'}" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+					<path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path>
+					<path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path>
+				</svg>
+				<span class="font-medium">bonifasiuskhris@gmail.com</span>
+			</div>
+		</div>
+			<div class="flex flex-wrap justify-center md:justify-start gap-3 md:gap-4 mb-6">
 				<a
 					href="https://www.linkedin.com/in/bonifasiuskhris/"
 					rel="noreferrer"
 					target="_blank"
-					class="social-link text-white text-sm md:text-base px-3 py-2 md:px-4 md:py-2 {$theme ===
-				'light'
-					? 'bg-orange_pantone-600 hover:bg-orange_pantone-700'
-					: 'bg-orange_pantone-600 hover:bg-orange_pantone-700'}"
+					class="btn btn-primary text-sm md:text-base"
 				>
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
@@ -109,10 +165,7 @@
 					href="https://www.instagram.com/bonifasiuskhris/"
 					rel="noreferrer"
 					target="_blank"
-					class="social-link text-white text-sm md:text-base px-3 py-2 md:px-4 md:py-2 {$theme ===
-			'light'
-				? 'bg-orange_pantone-600 hover:bg-orange_pantone-700'
-				: 'bg-orange_pantone-700 hover:bg-orange_pantone-800'}"
+					class="btn btn-secondary text-sm md:text-base"
 				>
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
@@ -132,10 +185,7 @@
 					href="https://x.com/bonifasiuskhris"
 					rel="noreferrer"
 					target="_blank"
-					class="social-link text-white text-sm md:text-base px-3 py-2 md:px-4 md:py-2 {$theme ===
-					'light'
-						? 'bg-orange_pantone-600 hover:bg-orange_pantone-700'
-						: 'bg-orange_pantone-600 hover:bg-orange_pantone-700'}"
+					class="btn btn-secondary text-sm md:text-base"
 				>
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
@@ -151,6 +201,42 @@
 					</svg>
 					X
 				</a>
+				<button
+					on:click={downloadPDF}
+					class="btn btn-secondary text-sm md:text-base"
+				>
+					<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="mr-1 md:mr-2" viewBox="0 0 16 16">
+						<path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+						<path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
+					</svg>
+					Download PDF
+				</button>
+				<button
+					on:click={() => window.print()}
+					class="btn btn-secondary text-sm md:text-base"
+				>
+					<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="mr-1 md:mr-2" viewBox="0 0 16 16">
+						<path d="M2.5 8a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1z"/>
+						<path d="M5 1a2 2 0 0 0-2 2v2H2a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h1v1a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-1h1a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-1V3a2 2 0 0 0-2-2H5zM13 3v2H3V3h10zM2 7h12v3H2V7zm1 5v1h10v-1H2zm11 1v-1H3v1H2v1h12v-1h-1z"/>
+					</svg>
+					Print Resume
+				</button>
+			</div>
+
+			<!-- Quick Navigation -->
+			<div class="mt-8 flex justify-center space-x-4">
+				<a href="/portfolio" class="btn btn-primary">
+					<svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+					</svg>
+					View Portfolio
+				</a>
+				<a href="/blog" class="btn btn-secondary">
+					<svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+					</svg>
+					Read Blog
+				</a>
 			</div>
 		</div>
 	</div>
@@ -158,26 +244,28 @@
 
 <!-- About Section -->
 <section class="section-card" class:animate-slide-up={mounted}>
-	<h3 class="text-xl md:text-2xl font-bold {$theme === 'light' ? 'text-black-500' : 'text-white'} mb-4 md:mb-6 flex items-center">
-		<svg class="w-5 h-5 md:w-6 md:h-6 mr-2 md:mr-3 {$theme === 'light' ? 'text-orange_pantone-600' : 'text-orange_pantone-800'}" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+	<h3 class="text-heading text-xl md:text-2xl font-bold mb-4 md:mb-6 flex items-center {$theme === 'light' ? 'text-slate-900' : 'text-white'}">
+		<svg class="w-5 h-5 md:w-6 md:h-6 mr-2 md:mr-3 {$theme === 'light' ? 'text-blue-600' : 'text-blue-400'}" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
 			<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
 		</svg>
 		About Me
 	</h3>
-	<div class="space-y-3 md:space-y-4 {$theme === 'light' ? 'text-black-700' : 'text-white'} leading-relaxed text-sm md:text-base">
-		<p class="text-base md:text-lg">Hi, I'm <span class="font-semibold {$theme === 'light' ? 'text-black-500' : 'text-white'}">Boni</span></p>
-		<p>
+	<div class="space-y-4 md:space-y-6 text-sm md:text-base leading-relaxed">
+		<p class="text-base md:text-lg font-medium {$theme === 'light' ? 'text-slate-800' : 'text-slate-200'}">
+			Hi, I'm <span class="{$theme === 'light' ? 'text-blue-600' : 'text-blue-400'}">Boni</span>
+		</p>
+		<p class="{$theme === 'light' ? 'text-slate-700' : 'text-slate-300'}">
 			I'm a Full-stack Developer with a unique UI/UX approach and practical experience in web
 			development, project management, and marketing. As a creative individual, I bring simple solutions
 			to complex problems with strong troubleshooting abilities. I'm a logical thinker with a competitive
 			mindset, on a mission to become a generalizing specialist.
 		</p>
-		<p>
+		<p class="{$theme === 'light' ? 'text-slate-700' : 'text-slate-300'}">
 			I excel at problem-solving with an outside-the-box approach, consistently delivering
 			timely solutions. My strength lies in collaborative environments where effective communication
 			enables me to tackle diverse challenges and drive successful outcomes.
 		</p>
-		<p>
+		<p class="{$theme === 'light' ? 'text-slate-700' : 'text-slate-300'}">
 			I thrive in team settings and believe that clear communication is the foundation of effective
 			problem-solving. This combination of technical expertise and interpersonal skills allows me
 			to contribute meaningfully to any project or organization.
@@ -187,9 +275,9 @@
 
 <!-- Skills Section -->
 <section class="section-card" class:animate-slide-up={mounted}>
-	<h3 class="text-xl md:text-2xl font-bold {$theme === 'light' ? 'text-black-500' : 'text-white'} mb-4 md:mb-6 flex items-center">
+	<h3 class="text-heading text-xl md:text-2xl font-bold mb-4 md:mb-6 flex items-center {$theme === 'light' ? 'text-slate-900' : 'text-white'}">
 		<svg
-			class="w-5 h-5 md:w-6 md:h-6 mr-2 md:mr-3 {$theme === 'light' ? 'text-orange_pantone-600' : 'text-orange_pantone-600'}"
+			class="w-5 h-5 md:w-6 md:h-6 mr-2 md:mr-3 {$theme === 'light' ? 'text-blue-600' : 'text-blue-400'}"
 			fill="none"
 			stroke="currentColor"
 			viewBox="0 0 24 24"
@@ -204,45 +292,135 @@
 		</svg>
 		Technical Skills
 	</h3>
-	<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-3">
-		<div
-			class="skill-badge {$theme === 'light' ? 'bg-orange_pantone-600 hover:bg-orange_pantone-700' : 'bg-orange_pantone-600 hover:bg-orange_pantone-700'} text-white text-xs md:text-sm px-3 py-2 md:px-4 md:py-2"
-		>
+	
+	<!-- Skills Matrix -->
+	<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 mb-6">
+		<!-- Backend Skills -->
+		<div class="card">
+			<h4 class="font-semibold mb-3 {$theme === 'light' ? 'text-slate-800' : 'text-slate-200'}">Backend Development</h4>
+			<div class="space-y-2">
+				<div class="flex justify-between items-center">
+					<span class="{$theme === 'light' ? 'text-slate-700' : 'text-slate-300'}">PHP</span>
+					<div class="flex space-x-1">
+						<div class="w-3 h-3 rounded-full {$theme === 'light' ? 'bg-blue-600' : 'bg-blue-300'}"></div>
+						<div class="w-3 h-3 rounded-full {$theme === 'light' ? 'bg-blue-600' : 'bg-blue-300'}"></div>
+						<div class="w-3 h-3 rounded-full {$theme === 'light' ? 'bg-blue-600' : 'bg-blue-300'}"></div>
+						<div class="w-3 h-3 rounded-full {$theme === 'light' ? 'bg-blue-600' : 'bg-blue-300'}"></div>
+						<div class="w-3 h-3 rounded-full {$theme === 'light' ? 'bg-slate-300' : 'bg-slate-500'}"></div>
+					</div>
+				</div>
+				<div class="flex justify-between items-center">
+					<span class="{$theme === 'light' ? 'text-slate-700' : 'text-slate-300'}">Laravel</span>
+					<div class="flex space-x-1">
+						<div class="w-3 h-3 rounded-full {$theme === 'light' ? 'bg-blue-600' : 'bg-blue-300'}"></div>
+						<div class="w-3 h-3 rounded-full {$theme === 'light' ? 'bg-blue-600' : 'bg-blue-300'}"></div>
+						<div class="w-3 h-3 rounded-full {$theme === 'light' ? 'bg-blue-600' : 'bg-blue-300'}"></div>
+						<div class="w-3 h-3 rounded-full {$theme === 'light' ? 'bg-blue-600' : 'bg-blue-300'}"></div>
+						<div class="w-3 h-3 rounded-full {$theme === 'light' ? 'bg-slate-300' : 'bg-slate-500'}"></div>
+					</div>
+				</div>
+				<div class="flex justify-between items-center">
+					<span class="{$theme === 'light' ? 'text-slate-700' : 'text-slate-300'}">MySQL</span>
+					<div class="flex space-x-1">
+						<div class="w-3 h-3 rounded-full {$theme === 'light' ? 'bg-blue-600' : 'bg-blue-300'}"></div>
+						<div class="w-3 h-3 rounded-full {$theme === 'light' ? 'bg-blue-600' : 'bg-blue-300'}"></div>
+						<div class="w-3 h-3 rounded-full {$theme === 'light' ? 'bg-blue-600' : 'bg-blue-300'}"></div>
+						<div class="w-3 h-3 rounded-full {$theme === 'light' ? 'bg-blue-600' : 'bg-blue-300'}"></div>
+						<div class="w-3 h-3 rounded-full {$theme === 'light' ? 'bg-slate-300' : 'bg-slate-500'}"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<!-- Frontend Skills -->
+		<div class="card">
+			<h4 class="font-semibold mb-3 {$theme === 'light' ? 'text-slate-800' : 'text-slate-200'}">Frontend Development</h4>
+			<div class="space-y-2">
+				<div class="flex justify-between items-center">
+					<span class="{$theme === 'light' ? 'text-slate-700' : 'text-slate-300'}">JavaScript</span>
+					<div class="flex space-x-1">
+						<div class="w-3 h-3 rounded-full {$theme === 'light' ? 'bg-blue-600' : 'bg-blue-300'}"></div>
+						<div class="w-3 h-3 rounded-full {$theme === 'light' ? 'bg-blue-600' : 'bg-blue-300'}"></div>
+						<div class="w-3 h-3 rounded-full {$theme === 'light' ? 'bg-blue-600' : 'bg-blue-300'}"></div>
+						<div class="w-3 h-3 rounded-full {$theme === 'light' ? 'bg-slate-300' : 'bg-slate-500'}"></div>
+						<div class="w-3 h-3 rounded-full {$theme === 'light' ? 'bg-slate-300' : 'bg-slate-500'}"></div>
+					</div>
+				</div>
+				<div class="flex justify-between items-center">
+					<span class="{$theme === 'light' ? 'text-slate-700' : 'text-slate-300'}">HTML/CSS</span>
+					<div class="flex space-x-1">
+						<div class="w-3 h-3 rounded-full {$theme === 'light' ? 'bg-blue-600' : 'bg-blue-300'}"></div>
+						<div class="w-3 h-3 rounded-full {$theme === 'light' ? 'bg-blue-600' : 'bg-blue-300'}"></div>
+						<div class="w-3 h-3 rounded-full {$theme === 'light' ? 'bg-blue-600' : 'bg-blue-300'}"></div>
+						<div class="w-3 h-3 rounded-full {$theme === 'light' ? 'bg-blue-600' : 'bg-blue-300'}"></div>
+						<div class="w-3 h-3 rounded-full {$theme === 'light' ? 'bg-slate-300' : 'bg-slate-500'}"></div>
+					</div>
+				</div>
+				<div class="flex justify-between items-center">
+					<span class="{$theme === 'light' ? 'text-slate-700' : 'text-slate-300'}">Tailwind CSS</span>
+					<div class="flex space-x-1">
+						<div class="w-3 h-3 rounded-full {$theme === 'light' ? 'bg-blue-600' : 'bg-blue-300'}"></div>
+						<div class="w-3 h-3 rounded-full {$theme === 'light' ? 'bg-blue-600' : 'bg-blue-300'}"></div>
+						<div class="w-3 h-3 rounded-full {$theme === 'light' ? 'bg-blue-600' : 'bg-blue-300'}"></div>
+						<div class="w-3 h-3 rounded-full {$theme === 'light' ? 'bg-blue-600' : 'bg-blue-300'}"></div>
+						<div class="w-3 h-3 rounded-full {$theme === 'light' ? 'bg-slate-300' : 'bg-slate-500'}"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<!-- DevOps Skills -->
+		<div class="card">
+			<h4 class="font-semibold mb-3 {$theme === 'light' ? 'text-slate-800' : 'text-slate-200'}">DevOps & Tools</h4>
+			<div class="space-y-2">
+				<div class="flex justify-between items-center">
+					<span class="{$theme === 'light' ? 'text-slate-700' : 'text-slate-300'}">Nginx</span>
+					<div class="flex space-x-1">
+						<div class="w-3 h-3 rounded-full {$theme === 'light' ? 'bg-blue-600' : 'bg-blue-300'}"></div>
+						<div class="w-3 h-3 rounded-full {$theme === 'light' ? 'bg-blue-600' : 'bg-blue-300'}"></div>
+						<div class="w-3 h-3 rounded-full {$theme === 'light' ? 'bg-blue-600' : 'bg-blue-300'}"></div>
+						<div class="w-3 h-3 rounded-full {$theme === 'light' ? 'bg-slate-300' : 'bg-slate-500'}"></div>
+						<div class="w-3 h-3 rounded-full {$theme === 'light' ? 'bg-slate-300' : 'bg-slate-500'}"></div>
+					</div>
+				</div>
+				<div class="flex justify-between items-center">
+					<span class="{$theme === 'light' ? 'text-slate-700' : 'text-slate-300'}">Svelte</span>
+					<div class="flex space-x-1">
+						<div class="w-3 h-3 rounded-full {$theme === 'light' ? 'bg-blue-600' : 'bg-blue-300'}"></div>
+						<div class="w-3 h-3 rounded-full {$theme === 'light' ? 'bg-blue-600' : 'bg-blue-300'}"></div>
+						<div class="w-3 h-3 rounded-full {$theme === 'light' ? 'bg-blue-600' : 'bg-blue-300'}"></div>
+						<div class="w-3 h-3 rounded-full {$theme === 'light' ? 'bg-slate-300' : 'bg-slate-500'}"></div>
+						<div class="w-3 h-3 rounded-full {$theme === 'light' ? 'bg-slate-300' : 'bg-slate-500'}"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<!-- Traditional Skill Tags -->
+	<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4">
+		<div class="skill-badge bg-blue-100 text-blue-800 text-xs md:text-sm px-4 py-2 rounded-lg font-medium {$theme === 'dark' ? 'bg-slate-700 text-blue-300 border border-slate-600' : ''}">
 			PHP
 		</div>
-		<div
-			class="skill-badge {$theme === 'light' ? 'bg-orange_pantone-600 hover:bg-orange_pantone-700' : 'bg-orange_pantone-600 hover:bg-orange_pantone-700'} text-white text-xs md:text-sm px-3 py-2 md:px-4 md:py-2"
-		>
+		<div class="skill-badge bg-blue-100 text-blue-800 text-xs md:text-sm px-4 py-2 rounded-lg font-medium {$theme === 'dark' ? 'bg-slate-700 text-blue-300 border border-slate-600' : ''}">
 			Laravel
 		</div>
-		<div
-			class="skill-badge {$theme === 'light' ? 'bg-orange_pantone-600 hover:bg-orange_pantone-700' : 'bg-orange_pantone-600 hover:bg-orange_pantone-700'} text-white text-xs md:text-sm px-3 py-2 md:px-4 md:py-2"
-		>
+		<div class="skill-badge bg-blue-100 text-blue-800 text-xs md:text-sm px-4 py-2 rounded-lg font-medium {$theme === 'dark' ? 'bg-slate-700 text-blue-300 border border-slate-600' : ''}">
 			MySQL
 		</div>
-		<div
-			class="skill-badge {$theme === 'light' ? 'bg-orange_pantone-600 hover:bg-orange_pantone-700' : 'bg-orange_pantone-600 hover:bg-orange_pantone-700'} text-white text-xs md:text-sm px-3 py-2 md:px-4 md:py-2"
-		>
+		<div class="skill-badge bg-blue-100 text-blue-800 text-xs md:text-sm px-4 py-2 rounded-lg font-medium {$theme === 'dark' ? 'bg-slate-700 text-blue-300 border border-slate-600' : ''}">
 			JavaScript
 		</div>
-		<div
-			class="skill-badge {$theme === 'light' ? 'bg-orange_pantone-600 hover:bg-orange_pantone-700' : 'bg-orange_pantone-600 hover:bg-orange_pantone-700'} text-white text-xs md:text-sm px-3 py-2 md:px-4 md:py-2"
-		>
+		<div class="skill-badge bg-blue-100 text-blue-800 text-xs md:text-sm px-4 py-2 rounded-lg font-medium {$theme === 'dark' ? 'bg-slate-700 text-blue-300 border border-slate-600' : ''}">
 			HTML
 		</div>
-		<div
-			class="skill-badge {$theme === 'light' ? 'bg-orange_pantone-600 hover:bg-orange_pantone-700' : 'bg-orange_pantone-600 hover:bg-orange_pantone-700'} text-white text-xs md:text-sm px-3 py-2 md:px-4 md:py-2"
-		>
+		<div class="skill-badge bg-blue-100 text-blue-800 text-xs md:text-sm px-4 py-2 rounded-lg font-medium {$theme === 'dark' ? 'bg-slate-700 text-blue-300 border border-slate-600' : ''}">
 			Tailwind CSS
 		</div>
-		<div
-			class="skill-badge {$theme === 'light' ? 'bg-orange_pantone-600 hover:bg-orange_pantone-700' : 'bg-orange_pantone-600 hover:bg-orange_pantone-700'} text-white text-xs md:text-sm px-3 py-2 md:px-4 md:py-2"
-		>
+		<div class="skill-badge bg-blue-100 text-blue-800 text-xs md:text-sm px-4 py-2 rounded-lg font-medium {$theme === 'dark' ? 'bg-slate-700 text-blue-300 border border-slate-600' : ''}">
 			Nginx
 		</div>
-		<div
-			class="skill-badge {$theme === 'light' ? 'bg-orange_pantone-600 hover:bg-orange_pantone-700' : 'bg-orange_pantone-600 hover:bg-orange_pantone-700'} text-white text-xs md:text-sm px-3 py-2 md:px-4 md:py-2"
-		>
+		<div class="skill-badge bg-blue-100 text-blue-800 text-xs md:text-sm px-4 py-2 rounded-lg font-medium {$theme === 'dark' ? 'bg-slate-700 text-blue-300 border border-slate-600' : ''}">
 			Svelte
 		</div>
 	</div>
@@ -250,15 +428,9 @@
 
 <!-- Experience Section -->
 <section class="section-card" class:animate-slide-up={mounted}>
-	<h3
-		class="text-xl md:text-2xl font-bold {$theme === 'light'
-			? 'text-black-500'
-			: 'text-white'} mb-4 md:mb-6 flex items-center"
-	>
+	<h3 class="text-heading text-xl md:text-2xl font-bold mb-4 md:mb-6 flex items-center {$theme === 'light' ? 'text-slate-900' : 'text-white'}">
 		<svg
-			class="w-5 h-5 md:w-6 md:h-6 mr-2 md:mr-3 {$theme === 'light'
-				? 'text-orange_pantone-600'
-				: 'text-orange_pantone-800'}"
+			class="w-5 h-5 md:w-6 md:h-6 mr-2 md:mr-3 {$theme === 'light' ? 'text-blue-600' : 'text-blue-400'}"
 			fill="none"
 			stroke="currentColor"
 			viewBox="0 0 24 24"
@@ -273,55 +445,29 @@
 		</svg>
 		Professional Experience
 	</h3>
-	<div class="space-y-4 md:space-y-6">
-		<div
-			class="border-l-4 {$theme === 'light'
-				? 'border-orange_pantone-600'
-				: 'border-orange_pantone-700'} pl-4 md:pl-6 pb-4 md:pb-6 transition-all duration-300 {$theme ===
-			'light'
-				? 'hover:border-orange_pantone-500'
-				: 'hover:border-orange_pantone-600'}"
-		>
-			<div class="flex flex-col md:flex-row md:items-center md:justify-between mb-2">
-				<h4
-					class="text-lg md:text-xl font-semibold {$theme === 'light'
-					? 'text-black-500'
-					: 'text-white'}"
-				>
+	
+	<!-- Professional Timeline -->
+	<div class="timeline space-y-8 timeline-single-column">
+		<div class="timeline-item max-w-full">
+			<div class="mb-4">
+				<h4 class="text-xl font-semibold {$theme === 'light' ? 'text-slate-900' : 'text-white'} mb-2">
 					Tech Consultant
 				</h4>
-				<span class="{$theme === 'light'
-				? 'text-orange_pantone-600'
-				: 'text-orange_pantone-700'} font-medium text-sm md:text-base">Jan 2022 - Current</span
-				>
+				<span class="text-base font-medium {$theme === 'light' ? 'text-blue-600' : 'text-blue-400'}">
+					Jan 2022 - Current
+				</span>
 			</div>
-			<p
-				class="{$theme === 'light'
-				? 'text-orange_pantone-600'
-				: 'text-white'} mb-2 md:mb-3 text-sm md:text-base"
-			>
+			<p class="font-semibold mb-3 {$theme === 'light' ? 'text-slate-800' : 'text-slate-200'}">
 				Filotech (PT. Filosofi Teknologi Indonesia)
 			</p>
-			<p
-				class="{$theme === 'light'
-				? 'text-orange_pantone-600'
-				: 'text-orange_pantone-400'} mb-2 md:mb-3 text-sm md:text-base"
-			>
+			<p class="text-base mb-6 {$theme === 'light' ? 'text-slate-700' : 'text-slate-300'}">
 				Implementing technology strategies for the company and ensuring technological resources
 				meet company needs and budget:
 			</p>
-			<ul class="{$theme === 'light'
-				? 'text-black-700'
-				: 'text-white'} space-y-1 md:space-y-2 text-sm md:text-base">
-				<li
-					class="flex items-start transition-all duration-200 {$theme === 'light'
-						? 'hover:text-orange_pantone-600'
-						: 'hover:text-orange_pantone-800'}"
-				>
+			<ul class="space-y-4 text-base">
+				<li class="flex items-start {$theme === 'light' ? 'text-slate-700' : 'text-slate-300'}">
 					<svg
-						class="w-3 h-3 md:w-4 md:h-4 mr-2 mt-1 {$theme === 'light'
-					? 'text-orange_pantone-600'
-					: 'text-orange_pantone-700'} flex-shrink-0"
+						class="w-4 h-4 mr-3 mt-1 {$theme === 'light' ? 'text-blue-600' : 'text-blue-400'} flex-shrink-0"
 						fill="currentColor"
 						viewBox="0 0 20 20"
 					>
@@ -331,18 +477,11 @@
 							clip-rule="evenodd"
 						></path>
 					</svg>
-					Create, manage, and configure servers using Google Cloud Compute Engine Platform with LEMP (Linux,
-					Nginx, MySQL, PHP) stack, and set up self-hosted VPN with OpenVPN for secure access
+					<span>Create, manage, and configure servers using Google Cloud Compute Engine Platform with LEMP (Linux, Nginx, MySQL, PHP) stack, and set up self-hosted VPN with OpenVPN for secure access</span>
 				</li>
-				<li
-					class="flex items-start transition-all duration-200 {$theme === 'light'
-						? 'hover:text-orange_pantone-600'
-						: 'hover:text-orange_pantone-800'}"
-				>
+				<li class="flex items-start {$theme === 'light' ? 'text-slate-700' : 'text-slate-300'}">
 					<svg
-						class="w-3 h-3 md:w-4 md:h-4 mr-2 mt-1 {$theme === 'light'
-						? 'text-orange_pantone-600'
-						: 'text-orange_pantone-700'} flex-shrink-0"
+						class="w-3 h-3 md:w-4 md:h-4 mr-3 mt-1 {$theme === 'light' ? 'text-blue-600' : 'text-blue-400'} flex-shrink-0"
 						fill="currentColor"
 						viewBox="0 0 20 20"
 					>
@@ -352,18 +491,11 @@
 							clip-rule="evenodd"
 						></path>
 					</svg>
-					Integrate payment gateway and E-wallet APIs to create virtual accounts, disbursements, virtual wallets,
-					and QRIS for payment processing with KYC approval
+					<span>Integrate payment gateway and E-wallet APIs to create virtual accounts, disbursements, virtual wallets, and QRIS for payment processing with KYC approval</span>
 				</li>
-				<li
-					class="flex items-start transition-all duration-200 {$theme === 'light'
-						? 'hover:text-orange_pantone-600'
-						: 'hover:text-orange_pantone-800'}"
-				>
+				<li class="flex items-start {$theme === 'light' ? 'text-slate-700' : 'text-slate-300'}">
 					<svg
-						class="w-3 h-3 md:w-4 md:h-4 mr-2 mt-1 {$theme === 'light'
-							? 'text-orange_pantone-600'
-							: 'text-orange_pantone-700'} flex-shrink-0"
+						class="w-3 h-3 md:w-4 md:h-4 mr-3 mt-1 {$theme === 'light' ? 'text-blue-600' : 'text-blue-400'} flex-shrink-0"
 						fill="currentColor"
 						viewBox="0 0 20 20"
 					>
@@ -373,17 +505,11 @@
 							clip-rule="evenodd"
 						></path>
 					</svg>
-					Develop API Gateway for our system so others can easily integrate our payment solutions
+					<span>Develop API Gateway for our system so others can easily integrate our payment solutions</span>
 				</li>
-				<li
-					class="flex items-start transition-all duration-200 {$theme === 'light'
-						? 'hover:text-orange_pantone-600'
-						: 'hover:text-orange_pantone-800'}"
-				>
+				<li class="flex items-start {$theme === 'light' ? 'text-slate-700' : 'text-slate-300'}">
 					<svg
-						class="w-3 h-3 md:w-4 md:h-4 mr-2 mt-1 {$theme === 'light'
-							? 'text-orange_pantone-600'
-							: 'text-orange_pantone-700'} flex-shrink-0"
+						class="w-3 h-3 md:w-4 md:h-4 mr-3 mt-1 {$theme === 'light' ? 'text-blue-600' : 'text-blue-400'} flex-shrink-0"
 						fill="currentColor"
 						viewBox="0 0 20 20"
 					>
@@ -393,18 +519,11 @@
 							clip-rule="evenodd"
 						></path>
 					</svg>
-					Create several products from scratch: Write technical specifications (SRS, ERD, etc.), manage timelines
-					for each product using agile methodology, and develop using PHP Laravel with JavaScript/jQuery
+					<span>Create several products from scratch: Write technical specifications (SRS, ERD, etc.), manage timelines for each product using agile methodology, and develop using PHP Laravel with JavaScript/jQuery</span>
 				</li>
-				<li
-					class="flex items-start transition-all duration-200 {$theme === 'light'
-						? 'hover:text-orange_pantone-600'
-						: 'hover:text-orange_pantone-800'}"
-				>
+				<li class="flex items-start {$theme === 'light' ? 'text-slate-700' : 'text-slate-300'}">
 					<svg
-						class="w-3 h-3 md:w-4 md:h-4 mr-2 mt-1 {$theme === 'light'
-							? 'text-orange_pantone-600'
-							: 'text-orange_pantone-700'} flex-shrink-0"
+						class="w-3 h-3 md:w-4 md:h-4 mr-3 mt-1 {$theme === 'light' ? 'text-blue-600' : 'text-blue-400'} flex-shrink-0"
 						fill="currentColor"
 						viewBox="0 0 20 20"
 					>
@@ -414,18 +533,11 @@
 							clip-rule="evenodd"
 						></path>
 					</svg>
-					Products include: Filotech HR/Attendance, Filotech Koperasi, Filotech School System, Filotech
-					FnB System, Filotech Custom Solution
+					<span>Products include: Filotech HR/Attendance, Filotech Koperasi, Filotech School System, Filotech FnB System, Filotech Custom Solution</span>
 				</li>
-				<li
-					class="flex items-start transition-all duration-200 {$theme === 'light'
-						? 'hover:text-orange_pantone-600'
-						: 'hover:text-orange_pantone-800'}"
-				>
+				<li class="flex items-start {$theme === 'light' ? 'text-slate-700' : 'text-slate-300'}">
 					<svg
-						class="w-3 h-3 md:w-4 md:h-4 mr-2 mt-1 {$theme === 'light'
-							? 'text-orange_pantone-600'
-							: 'text-orange_pantone-700'} flex-shrink-0"
+						class="w-3 h-3 md:w-4 md:h-4 mr-3 mt-1 {$theme === 'light' ? 'text-blue-600' : 'text-blue-400'} flex-shrink-0"
 						fill="currentColor"
 						viewBox="0 0 20 20"
 					>
@@ -435,60 +547,30 @@
 							clip-rule="evenodd"
 						></path>
 					</svg>
-					Meet with clients to understand requirements, collect data, deliver analysis,
-					and provide problem resolution
+					<span>Meet with clients to understand requirements, collect data, deliver analysis, and provide problem resolution</span>
 				</li>
 			</ul>
 		</div>
 
-		<div
-			class="border-l-4 {$theme === 'light'
-				? 'border-orange_pantone-600'
-				: 'border-orange_pantone-700'} pl-4 md:pl-6 pb-4 md:pb-6 transition-all duration-300 {$theme ===
-			'light'
-				? 'hover:border-orange_pantone-500'
-				: 'hover:border-orange_pantone-600'}"
-		>
-			<div class="flex flex-col md:flex-row md:items-center md:justify-between mb-2">
-				<h4
-					class="text-lg md:text-xl font-semibold {$theme === 'light'
-					? 'text-black-500'
-					: 'text-white'}"
-				>
+		<div class="timeline-item max-w-full">
+			<div class="mb-4">
+				<h4 class="text-xl font-semibold {$theme === 'light' ? 'text-slate-900' : 'text-white'} mb-2">
 					Full Stack Developer
 				</h4>
-				<span
-					class="{$theme === 'light'
-					? 'text-orange_pantone-600'
-					: 'text-orange_pantone-700'} font-medium text-sm md:text-base">Oct 2018 - Dec 2021</span
-				>
+				<span class="text-base font-medium {$theme === 'light' ? 'text-blue-600' : 'text-blue-400'}">
+					Oct 2018 - Dec 2021
+				</span>
 			</div>
-			<p
-				class="{$theme === 'light'
-					? 'text-orange_pantone-600'
-					: 'text-orange_pantone-400'} mb-2 md:mb-3 text-sm md:text-base"
-			>
+			<p class="font-semibold mb-3 {$theme === 'light' ? 'text-slate-800' : 'text-slate-200'}">
 				Worktrees (PT. Putra Tekno Asia)
 			</p>
-			<p
-				class="{$theme === 'light'
-				? 'text-black-700'
-				: 'text-white'} mb-2 md:mb-3 text-sm md:text-base"
-			>
+			<p class="text-base mb-6 {$theme === 'light' ? 'text-slate-700' : 'text-slate-300'}">
 				Managed the overall operation of IT systems and software, including:
 			</p>
-			<ul class="{$theme === 'light'
-				? 'text-black-700'
-				: 'text-white'} space-y-1 md:space-y-2 text-sm md:text-base">
-				<li
-					class="flex items-start transition-all duration-200 {$theme === 'light'
-						? 'hover:text-orange_pantone-600'
-						: 'hover:text-orange_pantone-800'}"
-				>
+			<ul class="space-y-4 text-base">
+				<li class="flex items-start {$theme === 'light' ? 'text-slate-700' : 'text-slate-300'}">
 					<svg
-					class="w-3 h-3 md:w-4 md:h-4 mr-2 mt-1 {$theme === 'light'
-						? 'text-orange_pantone-600'
-						: 'text-orange_pantone-700'} flex-shrink-0"
+					class="w-4 h-4 mr-3 mt-1 {$theme === 'light' ? 'text-blue-600' : 'text-blue-400'} flex-shrink-0"
 					fill="currentColor"
 					viewBox="0 0 20 20"
 				>
@@ -498,17 +580,11 @@
 							clip-rule="evenodd"
 						></path>
 					</svg>
-					Translated wireframes and rapid prototyping designs into accurate, functional code
+					<span>Translated wireframes and rapid prototyping designs into accurate, functional code</span>
 				</li>
-				<li
-					class="flex items-start transition-all duration-200 {$theme === 'light'
-						? 'hover:text-orange_pantone-600'
-						: 'hover:text-orange_pantone-800'}"
-				>
+				<li class="flex items-start {$theme === 'light' ? 'text-slate-700' : 'text-slate-300'}">
 					<svg
-					class="w-3 h-3 md:w-4 md:h-4 mr-2 mt-1 {$theme === 'light'
-						? 'text-orange_pantone-600'
-						: 'text-orange_pantone-700'} flex-shrink-0"
+					class="w-3 h-3 md:w-4 md:h-4 mr-3 mt-1 {$theme === 'light' ? 'text-blue-600' : 'text-blue-400'} flex-shrink-0"
 					fill="currentColor"
 					viewBox="0 0 20 20"
 				>
@@ -518,17 +594,11 @@
 							clip-rule="evenodd"
 						></path>
 					</svg>
-					Designed interactive elements in an agile development environment
+					<span>Designed interactive elements in an agile development environment</span>
 				</li>
-				<li
-					class="flex items-start transition-all duration-200 {$theme === 'light'
-						? 'hover:text-orange_pantone-600'
-						: 'hover:text-orange_pantone-800'}"
-				>
+				<li class="flex items-start {$theme === 'light' ? 'text-slate-700' : 'text-slate-300'}">
 					<svg
-					class="w-3 h-3 md:w-4 md:h-4 mr-2 mt-1 {$theme === 'light'
-						? 'text-orange_pantone-600'
-						: 'text-orange_pantone-700'} flex-shrink-0"
+					class="w-3 h-3 md:w-4 md:h-4 mr-3 mt-1 {$theme === 'light' ? 'text-blue-600' : 'text-blue-400'} flex-shrink-0"
 					fill="currentColor"
 					viewBox="0 0 20 20"
 				>
@@ -538,17 +608,11 @@
 							clip-rule="evenodd"
 						></path>
 					</svg>
-					Executed UI and UX design projects that improved load times, site stickiness, and user engagement
+					<span>Executed UI and UX design projects that improved load times, site stickiness, and user engagement</span>
 				</li>
-				<li
-					class="flex items-start transition-all duration-200 {$theme === 'light'
-						? 'hover:text-orange_pantone-600'
-						: 'hover:text-orange_pantone-800'}"
-				>
+				<li class="flex items-start {$theme === 'light' ? 'text-slate-700' : 'text-slate-300'}">
 					<svg
-					class="w-3 h-3 md:w-4 md:h-4 mr-2 mt-1 {$theme === 'light'
-						? 'text-orange_pantone-600'
-						: 'text-orange_pantone-700'} flex-shrink-0"
+					class="w-3 h-3 md:w-4 md:h-4 mr-3 mt-1 {$theme === 'light' ? 'text-blue-600' : 'text-blue-400'} flex-shrink-0"
 					fill="currentColor"
 					viewBox="0 0 20 20"
 				>
@@ -558,23 +622,48 @@
 							clip-rule="evenodd"
 						></path>
 					</svg>
-					Developed applications using HTML5, CSS3, JavaScript, jQuery, PHP Laravel/CodeIgniter frameworks,
-					and integrated third-party APIs (WhatsApp, Midtrans, RajaOngkir, Typeform, etc.)
+					<span>Developed applications using HTML5, CSS3, JavaScript, jQuery, PHP Laravel/CodeIgniter frameworks, and integrated third-party APIs (WhatsApp, Midtrans, RajaOngkir, Typeform, etc.)</span>
 				</li>
 			</ul>
 		</div>
 	</div>
 </section>
 
+<!-- Navigation to Portfolio and Blog -->
+<section class="section-card" class:animate-slide-up={mounted}>
+	<h3 class="text-heading text-xl md:text-2xl font-bold mb-4 md:mb-6 text-center {$theme === 'light' ? 'text-slate-900' : 'text-white'}">
+		Explore More
+	</h3>
+	<p class="text-center mb-6 {$theme === 'light' ? 'text-slate-600' : 'text-slate-300'} max-w-2xl mx-auto">
+		Discover my projects and technical insights through my portfolio and blog
+	</p>
+	<div class="flex flex-col sm:flex-row gap-4 justify-center">
+		<a
+			href="/portfolio"
+			class="btn btn-primary inline-flex items-center justify-center text-sm md:text-base"
+		>
+			<svg class="w-4 h-4 md:w-5 md:h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+				<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+			</svg>
+			View Portfolio
+		</a>
+		<a
+			href="/blog"
+			class="btn btn-secondary inline-flex items-center justify-center text-sm md:text-base"
+		>
+			<svg class="w-4 h-4 md:w-5 md:h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+				<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+			</svg>
+			Read Blog
+		</a>
+	</div>
+</section>
+
 <!-- Contact Section -->
 <section class="section-card" class:animate-slide-up={mounted}>
-	<h3
-		class="text-xl md:text-2xl font-bold {$theme === 'light' ? 'text-black-500' : 'text-white'} mb-4 md:mb-6 flex items-center"
-	>
+	<h3 class="text-heading text-xl md:text-2xl font-bold mb-4 md:mb-6 flex items-center {$theme === 'light' ? 'text-slate-900' : 'text-white'}">
 		<svg
-			class="w-5 h-5 md:w-6 md:h-6 mr-2 md:mr-3 {$theme === 'light'
-				? 'text-orange_pantone-600'
-				: 'text-orange_pantone-800'}"
+			class="w-5 h-5 md:w-6 md:h-6 mr-2 md:mr-3 {$theme === 'light' ? 'text-blue-600' : 'text-blue-400'}"
 			fill="none"
 			stroke="currentColor"
 			viewBox="0 0 24 24"
@@ -589,19 +678,14 @@
 		</svg>
 		Let's Connect
 	</h3>
-	<p
-		class="{$theme === 'light' ? 'text-black-700' : 'text-white'} mb-4 md:mb-6 text-sm md:text-base leading-relaxed"
-	>
+	<p class="text-sm md:text-base leading-relaxed mb-6 md:mb-8 {$theme === 'light' ? 'text-slate-700' : 'text-slate-300'}">
 		Ready to collaborate on your next project? Let's discuss how we can work together to bring your
 		ideas to life.
 	</p>
 	<div class="flex flex-col sm:flex-row gap-3 md:gap-4">
 		<a
 			href="mailto:bonifasiuskhris@gmail.com"
-			class="inline-flex items-center justify-center px-4 md:px-6 py-2 md:py-3 text-white rounded-lg transition-all duration-300 text-sm md:text-base font-medium shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 {$theme ===
-			'light'
-				? 'bg-orange_pantone-600 hover:bg-orange_pantone-700'
-				: 'bg-orange_pantone-600 hover:bg-orange_pantone-700'}"
+			class="btn btn-primary text-sm md:text-base"
 		>
 			<svg
 				class="w-4 h-4 md:w-5 md:h-5 mr-2"
@@ -623,10 +707,7 @@
 			href="https://wa.me/6282112572485"
 			target="_blank"
 			rel="noreferrer"
-			class="inline-flex items-center justify-center px-4 md:px-6 py-2 md:py-3 text-white rounded-lg transition-all duration-300 text-sm md:text-base font-medium shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 {$theme ===
-			'light'
-				? 'bg-orange_pantone-600 hover:bg-orange_pantone-700'
-				: 'bg-orange_pantone-700 hover:bg-orange_pantone-800'}"
+			class="btn btn-secondary text-sm md:text-base"
 		>
 			<svg class="w-4 h-4 md:w-5 md:h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
 				<path
@@ -637,3 +718,5 @@
 		</a>
 	</div>
 </section>
+
+</main>

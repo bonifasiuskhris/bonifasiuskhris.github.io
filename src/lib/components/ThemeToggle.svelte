@@ -17,7 +17,7 @@
 {#if mounted}
 	<button
 		on:click={toggleTheme}
-		class="relative inline-flex h-6 w-11 items-center rounded-full transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 {$theme === 'dark' ? 'bg-orange_pantone-600 focus:ring-orange_pantone-500' : 'bg-gray-200 focus:ring-orange_pantone-500'}"
+		class="relative inline-flex h-6 w-11 items-center rounded-full transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 {$theme === 'dark' ? 'bg-blue-600 focus:ring-blue-500' : 'bg-slate-300 focus:ring-blue-500'}"
 		aria-label="Toggle theme"
 		title="Toggle between light and dark theme"
 	>
@@ -31,7 +31,7 @@
 				</svg>
 			{:else}
 				<!-- Moon icon for dark mode -->
-				<svg class="h-3 w-3 text-orange_pantone-400 absolute top-0.5 left-0.5" fill="currentColor" viewBox="0 0 20 20">
+				<svg class="h-3 w-3 text-blue-400 absolute top-0.5 left-0.5" fill="currentColor" viewBox="0 0 20 20">
 					<path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" />
 				</svg>
 			{/if}

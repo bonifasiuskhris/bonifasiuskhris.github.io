@@ -10,7 +10,7 @@
 	});
 </script>
 
-<main class="min-h-screen transition-colors duration-300 {$theme === 'light' ? 'bg-white' : 'bg-indigo_dye-100'} py-4 md:py-8 px-4">
+<main class="min-h-screen transition-colors duration-300 {$theme === 'light' ? 'bg-slate-50' : 'bg-slate-900'} py-4 md:py-8 px-4">
 	<!-- Theme Toggle -->
 	<div class="fixed top-4 right-4 z-50">
 		<ThemeToggle />

@@ -9,7 +9,21 @@
 	let readingProgress = 0;
 	let articleContent;
 
-	$: currentPost = data.post;
+	$: currentPost = data.meta ? {
+		title: data.meta.title || 'Untitled',
+		excerpt: data.meta.excerpt || data.meta.description || '',
+		date: data.meta.date || new Date().toISOString(),
+		readTime: data.meta.readTime || '5 min read',
+		tags: data.meta.tags || [],
+		author: data.meta.author || 'Bonifasius Khrisna Wicaksono',
+		toc: data.meta.toc || []
+	} : null;
+	$: PostContent = data.content;
+
+	// Fallback empty data to satisfy UI
+	let relatedPosts = [];
+	let previousPost = null;
+	let nextPost = null;
 
 	onMount(() => {
 		mounted = true;
@@ -182,19 +196,7 @@
 		class:animate-slide-up={mounted}
 	>
 		<div class="prose prose-lg max-w-none {$theme === 'light' ? 'prose-slate' : 'prose-invert prose-slate'}">
-			{@html currentPost.content.split('\n').map(line => {
-				// Enhanced markdown-like parsing with ID support for TOC
-				return line
-					.replace(/^### (.*$)/gm, '<h3 id="$1.toLowerCase().replace(/\\s+/g, \'-\')">$1</h3>')
-					.replace(/^## (.*$)/gm, '<h2 id="$1.toLowerCase().replace(/\\s+/g, \'-\')">$1</h2>')
-					.replace(/^# (.*$)/gm, '<h1 id="$1.toLowerCase().replace(/\\s+/g, \'-\')">$1</h1>')
-					.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-					.replace(/\*(.*?)\*/g, '<em>$1</em>')
-					.replace(/\`([^`]+)\`/g, '<code>$1</code>')
-					.replace(/```([\s\S]*?)```/g, '<pre><code>$1</code></pre>')
-					.replace(/^- (.*$)/gm, '<li>$1</li>')
-					.replace(/^\d+\. (.*$)/gm, '<li>$1</li>');
-			}).join('\n')}
+			<svelte:component this={PostContent} />
 		</div>
 	</article>
 

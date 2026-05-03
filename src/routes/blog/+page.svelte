@@ -1,76 +1,25 @@
 <script>
 	import { theme } from '$lib/stores/theme.js';
 	import { onMount } from 'svelte';
-	
+
+	export let data;
+	$: blogPosts = (data.posts || []).map(p => ({
+		title: p.meta.title || 'Untitled',
+		slug: p.path,
+		excerpt: p.meta.excerpt || p.meta.description || '',
+		date: p.meta.date || new Date().toISOString(),
+		readTime: p.meta.readTime || '5 min read',
+		tags: p.meta.tags || [],
+		featured: p.meta.featured || false,
+		image: p.meta.image || 'https://via.placeholder.com/600x400/4F46E5/ffffff?text=' + encodeURIComponent(p.meta.title || 'Blog')
+	}));
+
 	let mounted = false;
-	
+
 	onMount(() => {
 		mounted = true;
 	});
-	
-	const blogPosts = [
-		{
-			title: "Building Scalable Web Applications with Laravel",
-			slug: "building-scalable-web-applications-laravel",
-			excerpt: "Explore best practices for building scalable web applications using Laravel, including architecture patterns, performance optimization, and deployment strategies.",
-			date: "2024-01-15",
-			readTime: "8 min read",
-			tags: ["Laravel", "PHP", "Web Development"],
-			featured: true,
-			image: "https://via.placeholder.com/600x400/4F46E5/ffffff?text=Laravel+Scalability"
-		},
-		{
-			title: "Mastering React Hooks: A Complete Guide",
-			slug: "mastering-react-hooks-complete-guide",
-			excerpt: "Deep dive into React Hooks including useState, useEffect, useContext, and custom hooks. Learn when and how to use each hook effectively.",
-			date: "2024-01-10",
-			readTime: "12 min read",
-			tags: ["React", "JavaScript", "Frontend"],
-			featured: true,
-			image: "https://via.placeholder.com/600x400/61DAFB/000000?text=React+Hooks"
-		},
-		{
-			title: "Modern CSS Techniques for Responsive Design",
-			slug: "modern-css-techniques-responsive-design",
-			excerpt: "Discover modern CSS features like Grid, Flexbox, Container Queries, and CSS Custom Properties for creating responsive layouts.",
-			date: "2024-01-05",
-			readTime: "10 min read",
-			tags: ["CSS", "Web Design", "Frontend"],
-			featured: false,
-			image: "https://via.placeholder.com/600x400/1572B6/ffffff?text=Modern+CSS"
-		},
-		{
-			title: "API Design Best Practices for RESTful Services",
-			slug: "api-design-best-practices-restful-services",
-			excerpt: "Learn the principles of good API design including versioning, authentication, rate limiting, and documentation standards.",
-			date: "2023-12-28",
-			readTime: "15 min read",
-			tags: ["API", "REST", "Backend"],
-			featured: false,
-			image: "https://via.placeholder.com/600x400/FF6B6B/ffffff?text=API+Design"
-		},
-		{
-			title: "Database Optimization Techniques for Web Applications",
-			slug: "database-optimization-techniques-web-applications",
-			excerpt: "Improve your application's performance with database indexing, query optimization, caching strategies, and proper schema design.",
-			date: "2023-12-20",
-			readTime: "11 min read",
-			tags: ["Database", "MySQL", "Performance"],
-			featured: false,
-			image: "https://via.placeholder.com/600x400/28A745/ffffff?text=Database+Optimization"
-		},
-		{
-			title: "Getting Started with Docker for Web Development",
-			slug: "getting-started-docker-web-development",
-			excerpt: "A beginner's guide to using Docker in web development including containerization, docker-compose, and development workflows.",
-			date: "2023-12-15",
-			readTime: "9 min read",
-			tags: ["Docker", "DevOps", "Development"],
-			featured: false,
-			image: "https://via.placeholder.com/600x400/2496ED/ffffff?text=Docker+Guide"
-		}
-	];
-	
+
 	function formatDate(dateString) {
 		const date = new Date(dateString);
 		return date.toLocaleDateString('en-US', {

@@ -6,7 +6,7 @@ tags: ["JavaScript", "Architecture", "Performance"]
 author: "Bonifasius Khris"
 excerpt: "Learn how to build web applications that scale with modern JavaScript patterns, performance optimization techniques, and architectural best practices."
 readTime: "8 min read"
-image: "/images/blog/scalable-apps.jpg"
+image: "https://via.placeholder.com/600x400/4F46E5/ffffff?text=Scalable+Apps"
 ---
 
 # Building Scalable Web Applications

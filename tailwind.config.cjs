@@ -65,7 +65,7 @@ module.exports = {
 					700: '#ffffff',
 					800: '#ffffff',
 					900: '#ffffff'
-				},
+				}
 			}
 		}
 	},

@@ -9,7 +9,7 @@ function createThemeStore() {
 		subscribe,
 		set,
 		update,
-		toggle: () => update(theme => theme === 'dark' ? 'light' : 'dark'),
+		toggle: () => update((theme) => (theme === 'dark' ? 'light' : 'dark')),
 		init: () => {
 			if (browser) {
 				// Check localStorage first
@@ -18,7 +18,7 @@ function createThemeStore() {
 					set(stored);
 					return;
 				}
-				
+
 				// Check system preference
 				const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 				set(prefersDark ? 'dark' : 'light');
@@ -38,7 +38,7 @@ export const theme = createThemeStore();
 
 // Auto-save theme changes
 if (browser) {
-	theme.subscribe(value => {
+	theme.subscribe((value) => {
 		theme.save(value);
 	});
 }
